@@ -1,0 +1,20 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/STM32F10x_Firmware/CMSIS/inc/",
+                "${workspaceFolder}/STM32F10x_Firmware/Std_Peripheral/inc/",
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE",
+                "STM32F10X_MD",
+                "USE_STDPERIPH_DRIVER"
+            ]
+        }
+    ],
+    "version": 4
+}
