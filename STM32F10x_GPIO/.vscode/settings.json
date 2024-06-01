@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "stm32f10x_rcc.h": "c",
+        "stm32f10x_gpio.h": "c",
+        "stm32f10x.h": "c",
+        "user_gpio.h": "c",
+        "stm32f10x_wwdg.h": "c",
+        "misc.h": "c",
+        "stm32f10x_spi.h": "c"
+    }
+}
