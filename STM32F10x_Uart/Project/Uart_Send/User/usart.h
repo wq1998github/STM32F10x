@@ -1,0 +1,113 @@
+#ifndef __UART_H
+#define __UART_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <stdio.h>
+#include "stm32f10x_conf.h"
+
+/**
+ * @brief 串口编号，STM32F103C8T6有三个串口
+ */
+typedef enum
+{
+    USART_COM_1 = 1,
+    USART_COM_2,
+    USART_COM_3,
+    USART_COM_MAX = 3,
+} USART_COM_Type;
+
+
+/**
+ * @brief 选择哪个串口作为日志输出口
+ */
+#define USART_LOG_SELECT    1
+
+
+/**
+ * @brief 日志口相关参数
+ */
+#if (USART_LOG_SELECT == 1)
+
+// USART1 的相关配置
+#define USART_LOG_GPIOx     GPIOA
+#define USART_LOG_TX_PIN    GPIO_Pin_9 
+#define USART_LOG_RX_PIN    GPIO_Pin_10
+
+#define USART_LOG_IRQN      USART1_IRQn
+
+#define RCC_Periph_GPIOx    RCC_APB2Periph_GPIOA
+#define RCC_Periph_USARTx   RCC_APB2Periph_USART1
+
+#define USART_LOG           USART1
+
+#elif (USART_LOG_SELECT == 2)
+
+// USART1 的相关配置
+#define USART_LOG_GPIOx     GPIOA
+#define USART_LOG_TX_PIN    GPIO_Pin_2
+#define USART_LOG_RX_PIN    GPIO_Pin_3
+
+#define USART_LOG_IRQN      USART2_IRQn
+
+#define RCC_Periph_GPIOx    RCC_APB2Periph_GPIOA
+#define RCC_Periph_USARTx   RCC_APB1Periph_USART2
+
+#define USART_LOG           USART2
+
+#elif (USART_LOG_SELECT == 3)
+
+// USART3 的相关配置
+#define USART_LOG_GPIOx     GPIOB
+#define USART_LOG_TX_PIN    GPIO_Pin_10
+#define USART_LOG_RX_PIN    GPIO_Pin_11
+
+#define USART_LOG_IRQN      USART3_IRQn
+
+#define RCC_Periph_GPIOx    RCC_APB2Periph_GPIOB
+#define RCC_Periph_USARTx   RCC_APB1Periph_USART3
+
+#define USART_LOG           USART3
+
+#endif
+
+
+/**
+ * @brief  打开日志输出口
+ * @param  BaudRate 波特率
+ * @return int 固定为0
+ */
+int usart_open_com_log(uint32_t BaudRate);
+
+/**
+ * @brief  发送一个字节的数据
+ * @param  byte 字节数据
+ */
+void usart_send_byte(unsigned char byte);
+
+/**
+ * @brief  发送一个字符串
+ * @param  str 字符串
+ */
+void usart_send_string(char* str);
+
+/**
+ * @brief  发送一个字符串
+ * @param  str 字符串
+ */
+void usart_send_string2(char *str);
+
+/**
+ * @brief  不使用微库的printf，注意可能会出现溢出问题
+ * @param  format 
+ * @param  ... 
+ */
+void usart_printf(char *format, ...);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
